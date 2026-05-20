@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AISLE — Premium Agency</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <!-- Three.js (WebGL 3D) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- GSAP (animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Site Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+  <nav id="main-nav">
+    <div class="nav-logo" id="nav-logo-btn">AISL<span>E</span></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#services" data-scroll="services">Services</a></li>
+      <li><a href="#about" data-scroll="about">Studio</a></li>
+      <li><a href="#cta" data-scroll="cta">Contact</a></li>
+    </ul>
+    <button class="nav-cta" id="cart-toggle-btn">
+      Cart
+      <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+    </button>
+  </nav>
+
+  <!-- ─── CART DRAWER ───────────────────────────────────────────────────── -->
+  <div id="cart-overlay"></div>
+  <aside id="cart-drawer">
+    <div class="cart-header">
+      <div class="cart-title">YOUR CART</div>
+      <button class="cart-close" id="cart-close-btn">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items-list">
+      <!-- injected by JS -->
+    </div>
+    <div class="cart-empty" id="cart-empty-msg">
+      <span>The aisle is empty.</span>
+      <small>Add a service to get started.</small>
+    </div>
+    <div class="cart-footer" id="cart-footer">
+      <div class="cart-total-row">
+        <span>SUBTOTAL</span>
+        <span id="cart-total-price">₹0</span>
+      </div>
+      <button class="btn-checkout" id="goto-checkout-btn">Proceed to Checkout</button>
+    </div>
+  </aside>
+
+  <!-- ─── SPA VIEW CONTAINER ───────────────────────────────────────────── -->
+  <div id="app-root">
+
+    <!-- ══════════════ VIEW: HOME ══════════════ -->
+    <div id="view-home" class="view active">
+
+      <!-- ─── HERO ──────────────────────────────────────────────────────── -->
+      <section id="hero">
+        <div class="hero-bg-text">AISLE</div>
+        <div class="hero-left">
+          <div class="hero-eyebrow">Premium Creative Agency</div>
+          <h1>We package<br><em>ideas</em> that<br>sell themselves.</h1>
+          <p class="hero-sub">Every service we offer is a carefully crafted product — designed, labeled, and ready for the shelf. Pick what you need. Take it home.</p>
+          <div class="hero-btns">
+            <a href="#services" class="btn-primary" data-scroll="services">Browse the Aisle</a>
+            <a href="#about" class="btn-secondary" data-scroll="about">Our Story</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <canvas id="hero-canvas"></canvas>
+        </div>
+      </section>
+
+      <!-- ─── TICKER ─────────────────────────────────────────────────────── -->
+      <div class="ticker">
+        <div class="ticker-inner" id="tickerInner"></div>
+      </div>
+
+      <!-- ─── SERVICES ───────────────────────────────────────────────────── -->
+      <section id="services">
+        <div class="section-header">
+          <div>
+            <div class="section-label">/ Services</div>
+            <h2>The Shelf</h2>
+          </div>
+          <div class="section-count">06</div>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+      </section>
+
+      <!-- ─── SHELF MARQUEE ──────────────────────────────────────────────── -->
+      <div class="shelf-divider">
+        <div class="shelf-track" id="shelfTrack"></div>
+      </div>
+
+      <!-- ─── ABOUT ──────────────────────────────────────────────────────── -->
+      <section id="about">
+        <div class="about-left">
+          <div class="section-label">/ Our Studio</div>
+          <h2>Obsessively<br>designed,<br>deliberately<br>different.</h2>
+          <p style="margin-top:28px; font-size:0.78rem; line-height:1.8; opacity:0.6; max-width:420px;">
+            We believe great work is like great packaging — it catches the eye, communicates instantly, and makes you reach for it. We don't just make things pretty; we make things irresistible.
+          </p>
+          <div class="about-stats">
+            <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Years on the shelf</span></div>
+            <div class="stat"><span class="stat-num">340</span><span class="stat-label">Projects delivered</span></div>
+            <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Client retention</span></div>
+            <div class="stat"><span class="stat-num">4×</span><span class="stat-label">Avg. ROI growth</span></div>
+          </div>
+        </div>
+        <div class="about-right">
+          <canvas id="about-canvas"></canvas>
+        </div>
+      </section>
+
+      <!-- ─── CTA ────────────────────────────────────────────────────────── -->
+      <section id="cta">
+        <div class="cta-bg-text">BUY NOW</div>
+        <h2>Ready to put your<br>brand <em>on the shelf?</em></h2>
+        <p>Let's build something so good it sells itself. Book a free discovery call and let's talk product.</p>
+        <a href="#" class="btn-cta" id="cta-cart-btn">Add to Cart — It's Free</a>
+      </section>
+
+      <!-- ─── FOOTER ─────────────────────────────────────────────────────── -->
+      <footer>
+        <div class="footer-logo">AISL<span>E</span></div>
+        <p>© 2026 Aisle Studio — All rights reserved</p>
+        <ul class="footer-links">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Dribbble</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </footer>
+
+    </div><!-- /view-home -->
+
+    <!-- ══════════════ VIEW: PRODUCT SPEC ══════════════ -->
+    <div id="view-product" class="view">
+      <div class="spec-layout">
+
+        <!-- Left: 3D Product Canvas -->
+        <div class="spec-canvas-col">
+          <div class="spec-product-label" id="spec-product-label">
+            <div class="spec-label-tag" id="spec-label-tag">Strategic</div>
+            <div class="spec-label-name" id="spec-label-name">Brand Identity</div>
+          </div>
+          <canvas id="spec-canvas"></canvas>
+          <div class="spec-canvas-floor"></div>
+          <a href="#" class="spec-back-btn" id="spec-back-btn">← Back to Shelf</a>
+        </div>
+
+        <!-- Right: Options Panel -->
+        <div class="spec-options-col">
+          <div class="spec-options-inner">
+
+            <div class="spec-eyebrow">/ Configure Your Package</div>
+            <h2 id="spec-title">Brand Identity</h2>
+            <p class="spec-desc" id="spec-desc">Full brand system — logo, color, type, voice, and guidelines.</p>
+
+            <!-- Duration -->
+            <div class="spec-group">
+              <div class="spec-group-label">Timeline</div>
+              <div class="spec-opts" id="spec-duration">
+                <button class="spec-opt active" data-key="duration" data-val="standard" data-mult="1">Standard (4 wks)</button>
+                <button class="spec-opt" data-key="duration" data-val="express" data-mult="1.35">Express (2 wks) +35%</button>
+                <button class="spec-opt" data-key="duration" data-val="rush" data-mult="1.6">Rush (1 wk) +60%</button>
+              </div>
+            </div>
+
+            <!-- Scope -->
+            <div class="spec-group">
+              <div class="spec-group-label">Scope</div>
+              <div class="spec-opts" id="spec-scope">
+                <button class="spec-opt active" data-key="scope" data-val="core" data-mult="1">Core Package</button>
+                <button class="spec-opt" data-key="scope" data-val="standard" data-mult="1.5">Standard Package +50%</button>
+                <button class="spec-opt" data-key="scope" data-val="full" data-mult="2.2">Full Suite +120%</button>
+              </div>
+            </div>
+
+            <!-- Add-ons -->
+            <div class="spec-group">
+              <div class="spec-group-label">Add-ons</div>
+              <div class="spec-addons" id="spec-addons">
+                <label class="addon-row">
+                  <input type="checkbox" data-price="18500" data-label="Source Files"> Source Files
+                  <span class="addon-price">+₹18,500</span>
+                </label>
+                <label class="addon-row">
+                  <input type="checkbox" data-price="27000" data-label="Priority Support"> Priority Support (3 mo)
+                  <span class="addon-price">+₹27,000</span>
+                </label>
+                <label class="addon-row">
+                  <input type="checkbox" data-price="42000" data-label="Brand Guidelines Doc"> Brand Guidelines PDF
+                  <span class="addon-price">+₹42,000</span>
+                </label>
+                <label class="addon-row">
+                  <input type="checkbox" data-price="35000" data-label="Social Media Kit"> Social Media Kit
+                  <span class="addon-price">+₹35,000</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Price Display -->
+            <div class="spec-price-row">
+              <div class="spec-price-label">Total Estimate</div>
+              <div class="spec-price-value" id="spec-price-display">₹3,09,120</div>
+            </div>
+
+            <div class="spec-actions">
+              <button class="btn-cta spec-add-btn" id="spec-add-to-cart">Add to Cart</button>
+              <button class="btn-spec-checkout" id="spec-checkout-btn">Proceed to Checkout</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /view-product -->
+
+    <!-- ══════════════ VIEW: CHECKOUT ══════════════ -->
+    <div id="view-checkout" class="view">
+      <div class="checkout-layout">
+
+        <!-- Left: Order Summary -->
+        <div class="checkout-summary-col">
+          <div class="checkout-summary-inner">
+            <div class="checkout-back-btn" id="checkout-back-btn">← Back to Cart</div>
+            <div class="checkout-eyebrow">/ Order Summary</div>
+            <h2 class="checkout-title">Your Shelf</h2>
+
+            <div class="checkout-items" id="checkout-items-list">
+              <!-- injected by JS -->
+            </div>
+
+            <div class="checkout-divider"></div>
+
+            <div class="checkout-line">
+              <span>Subtotal</span>
+              <span id="co-subtotal">₹0</span>
+            </div>
+            <div class="checkout-line">
+              <span>GST (18%)</span>
+              <span id="co-tax">₹0</span>
+            </div>
+            <div class="checkout-line checkout-grand">
+              <span>Grand Total</span>
+              <span id="co-grand">₹0</span>
+            </div>
+
+            <div class="checkout-note">
+              All prices in Indian Rupees. Payment is simulation only — no real charges.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Payment Form -->
+        <div class="checkout-payment-col">
+          <div class="checkout-payment-inner" id="checkout-payment-form">
+            <div class="checkout-eyebrow">/ Secure Checkout</div>
+            <h2 class="checkout-title">Payment Terminal</h2>
+
+            <!-- Card preview -->
+            <div class="card-preview" id="card-preview">
+              <div class="card-chip"></div>
+              <div class="card-network">AISLE</div>
+              <div class="card-number-display" id="card-num-display">•••• •••• •••• ••••</div>
+              <div class="card-bottom-row">
+                <div>
+                  <div class="card-field-label">CARDHOLDER</div>
+                  <div class="card-field-val" id="card-holder-display">YOUR NAME</div>
+                </div>
+                <div>
+                  <div class="card-field-label">EXPIRES</div>
+                  <div class="card-field-val" id="card-exp-display">MM / YY</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Fields -->
+            <div class="pay-field-group">
+              <label class="pay-label">Cardholder Name</label>
+              <input type="text" class="pay-input" id="field-name" placeholder="FULL NAME ON CARD" autocomplete="cc-name">
+            </div>
+            <div class="pay-field-group">
+              <label class="pay-label">Card Number</label>
+              <input type="text" class="pay-input" id="field-card" placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="cc-number">
+            </div>
+            <div class="pay-field-row">
+              <div class="pay-field-group">
+                <label class="pay-label">Expiry</label>
+                <input type="text" class="pay-input" id="field-exp" placeholder="MM / YY" maxlength="7" autocomplete="cc-exp">
+              </div>
+              <div class="pay-field-group">
+                <label class="pay-label">CVV</label>
+                <input type="text" class="pay-input" id="field-cvv" placeholder="•••" maxlength="3" autocomplete="cc-csc">
+              </div>
+            </div>
+
+            <button class="btn-pay" id="pay-now-btn">
+              <span id="pay-btn-text">Pay Now →</span>
+              <span id="pay-spinner" style="display:none">Processing…</span>
+            </button>
+
+          </div>
+
+          <!-- Success State -->
+          <div class="checkout-success" id="checkout-success" style="display:none">
+            <div class="success-icon">✦</div>
+            <h2>Order Placed<br><em>on the Shelf.</em></h2>
+            <p>Your package is being prepared. We'll reach out within 24 hours to begin your project.</p>
+            <div class="success-order-id" id="success-order-id">ORDER #AIS-00000</div>
+            <button class="btn-success-home" id="success-home-btn">Back to Aisle</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div><!-- /view-checkout -->
+
+  </div><!-- /app-root -->
+
+  <!-- Site Script -->
+  <script src="main.js"></script>
+
+</body>
+</html>
