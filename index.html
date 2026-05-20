@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AISLE — Premium Agency</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <!-- Three.js (WebGL 3D) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- GSAP (animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Site Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-logo">AISL<span>E</span></div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">Studio</a></li>
+      <li><a href="#cta">Contact</a></li>
+    </ul>
+    <button class="nav-cta">Add to Cart</button>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-bg-text">AISLE</div>
+    <div class="hero-left">
+      <div class="hero-eyebrow">Premium Creative Agency</div>
+      <h1>We package<br><em>ideas</em> that<br>sell themselves.</h1>
+      <p class="hero-sub">Every service we offer is a carefully crafted product — designed, labeled, and ready for the shelf. Pick what you need. Take it home.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-primary">Browse the Aisle</a>
+        <a href="#about" class="btn-secondary">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <canvas id="hero-canvas"></canvas>
+    </div>
+  </section>
+
+  <!-- ─── TICKER ───────────────────────────────────────────────────────── -->
+  <div class="ticker">
+    <div class="ticker-inner" id="tickerInner"></div>
+  </div>
+
+  <!-- ─── SERVICES ─────────────────────────────────────────────────────── -->
+  <section id="services">
+    <div class="section-header">
+      <div>
+        <div class="section-label">/ Services</div>
+        <h2>The Shelf</h2>
+      </div>
+      <div class="section-count">06</div>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+  <!-- ─── SHELF MARQUEE ────────────────────────────────────────────────── -->
+  <div class="shelf-divider">
+    <div class="shelf-track" id="shelfTrack"></div>
+  </div>
+
+  <!-- ─── ABOUT ────────────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="about-left">
+      <div class="section-label">/ Our Studio</div>
+      <h2>Obsessively<br>designed,<br>deliberately<br>different.</h2>
+      <p style="margin-top:28px; font-size:0.78rem; line-height:1.8; opacity:0.6; max-width:420px;">
+        We believe great work is like great packaging — it catches the eye, communicates instantly, and makes you reach for it. We don't just make things pretty; we make things irresistible.
+      </p>
+      <div class="about-stats">
+        <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Years on the shelf</span></div>
+        <div class="stat"><span class="stat-num">340</span><span class="stat-label">Projects delivered</span></div>
+        <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Client retention</span></div>
+        <div class="stat"><span class="stat-num">4×</span><span class="stat-label">Avg. ROI growth</span></div>
+      </div>
+    </div>
+    <div class="about-right">
+      <canvas id="about-canvas"></canvas>
+    </div>
+  </section>
+
+  <!-- ─── CTA ──────────────────────────────────────────────────────────── -->
+  <section id="cta">
+    <div class="cta-bg-text">BUY NOW</div>
+    <h2>Ready to put your<br>brand <em>on the shelf?</em></h2>
+    <p>Let's build something so good it sells itself. Book a free discovery call and let's talk product.</p>
+    <a href="#" class="btn-cta">Add to Cart — It's Free</a>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-logo">AISL<span>E</span></div>
+    <p>© 2026 Aisle Studio — All rights reserved</p>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Dribbble</a></li>
+      <li><a href="#">LinkedIn</a></li>
+    </ul>
+  </footer>
+
+  <!-- Site Script (must be after DOM + Three.js + GSAP) -->
+  <script src="main.js"></script>
+
+</body>
+</html>

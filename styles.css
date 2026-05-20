@@ -1,0 +1,336 @@
+/* ─── CSS VARIABLES ──────────────────────────────────────────────────────── */
+:root {
+  --cream: #f5f0e8;
+  --ivory: #faf8f3;
+  --charcoal: #1a1a1a;
+  --red: #d42b2b;
+  --gold: #c9973a;
+  --green: #2d5a3d;
+  --blue: #1b3a6b;
+  --purple: #4a2060;
+  --orange: #d4561a;
+}
+
+/* ─── RESET ─────────────────────────────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: 'DM Mono', monospace;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ─── CUSTOM CURSOR ──────────────────────────────────────────────────────── */
+#cursor {
+  position: fixed; width: 12px; height: 12px;
+  background: var(--red); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.3s, height 0.3s;
+  mix-blend-mode: multiply;
+}
+#cursor-ring {
+  position: fixed; width: 40px; height: 40px;
+  border: 1px solid var(--charcoal); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s, opacity 0.3s;
+}
+
+/* ─── NAV ────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; letter-spacing: 0.15em;
+  color: var(--charcoal);
+}
+.nav-logo span { color: var(--red); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; color: var(--charcoal); opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-cta {
+  background: var(--charcoal); color: var(--cream);
+  border: none; padding: 10px 24px;
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: none; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--red); }
+
+/* ─── HERO ───────────────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 100px 48px 60px;
+  gap: 40px;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-text {
+  position: absolute; font-family: 'Bebas Neue'; font-size: 22vw;
+  color: rgba(26, 26, 26, 0.04); pointer-events: none;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  white-space: nowrap; letter-spacing: -0.02em;
+}
+.hero-left { position: relative; z-index: 2; }
+.hero-eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block; width: 32px; height: 1px; background: var(--red);
+}
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  line-height: 1.05; font-weight: 900;
+  margin-bottom: 28px;
+  color: var(--charcoal);
+}
+h1 em { font-style: italic; color: var(--red); }
+.hero-sub {
+  font-size: 0.8rem; line-height: 1.8; opacity: 0.6; max-width: 400px;
+  margin-bottom: 48px;
+}
+.hero-btns { display: flex; gap: 16px; align-items: center; }
+.btn-primary {
+  background: var(--charcoal); color: var(--cream);
+  padding: 16px 36px; font-family: 'DM Mono'; font-size: 0.7rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; border: 2px solid var(--charcoal);
+  transition: all 0.25s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--red); border-color: var(--red); }
+.btn-secondary {
+  color: var(--charcoal); font-size: 0.7rem;
+  letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  border-bottom: 1px solid var(--charcoal); padding-bottom: 2px;
+  opacity: 0.6; transition: opacity 0.2s;
+}
+.btn-secondary:hover { opacity: 1; }
+.hero-right { position: relative; height: 600px; }
+#hero-canvas { width: 100%; height: 100%; }
+
+/* ─── TICKER ─────────────────────────────────────────────────────────────── */
+.ticker {
+  background: var(--charcoal); color: var(--cream);
+  padding: 14px 0; overflow: hidden; white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-flex; gap: 48px;
+  animation: ticker 25s linear infinite;
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+}
+.ticker-inner span { opacity: 0.5; }
+.ticker-inner b { font-weight: 400; }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ─── SERVICES ───────────────────────────────────────────────────────────── */
+#services {
+  padding: 120px 48px;
+  background: var(--ivory);
+}
+.section-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 80px; border-bottom: 1px solid rgba(26, 26, 26, 0.12);
+  padding-bottom: 32px;
+}
+.section-label {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 12px;
+}
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 900;
+}
+.section-count { font-size: 4rem; font-family: 'Bebas Neue'; opacity: 0.08; }
+.products-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.product-card {
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  background: var(--cream);
+  cursor: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+  border-color: rgba(26, 26, 26, 0.3);
+  box-shadow: 0 20px 60px rgba(26, 26, 26, 0.1);
+}
+.product-canvas-wrap {
+  width: 100%; height: 280px;
+  position: relative; overflow: hidden;
+}
+.product-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+.product-shelf {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(26, 26, 26, 0.15), transparent);
+}
+.product-info { padding: 28px 28px 32px; }
+.product-tag {
+  display: inline-block;
+  font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 4px 10px; margin-bottom: 14px;
+  border: 1px solid currentColor;
+}
+.product-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700; margin-bottom: 10px;
+}
+.product-desc {
+  font-size: 0.7rem; line-height: 1.7; opacity: 0.55;
+  margin-bottom: 20px;
+}
+.product-price {
+  font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 0.08em;
+  display: flex; align-items: baseline; gap: 6px;
+}
+.product-price small {
+  font-family: 'DM Mono'; font-size: 0.6rem; letter-spacing: 0.1em;
+  opacity: 0.5; font-weight: 300;
+}
+.product-add {
+  position: absolute; bottom: 28px; right: 28px;
+  width: 36px; height: 36px;
+  border: 1px solid var(--charcoal); background: transparent;
+  font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+  cursor: none; transition: all 0.2s;
+}
+.product-add:hover { background: var(--charcoal); color: var(--cream); }
+
+/* ─── CARD COLOR THEMES ──────────────────────────────────────────────────── */
+.card-red .product-tag    { color: var(--red);    border-color: var(--red);    }
+.card-red .product-price  { color: var(--red);    }
+.card-green .product-tag  { color: var(--green);  border-color: var(--green);  }
+.card-green .product-price{ color: var(--green);  }
+.card-blue .product-tag   { color: var(--blue);   border-color: var(--blue);   }
+.card-blue .product-price { color: var(--blue);   }
+.card-purple .product-tag { color: var(--purple); border-color: var(--purple); }
+.card-purple .product-price{color: var(--purple); }
+.card-gold .product-tag   { color: var(--gold);   border-color: var(--gold);   }
+.card-gold .product-price { color: var(--gold);   }
+.card-orange .product-tag { color: var(--orange); border-color: var(--orange); }
+.card-orange .product-price{color: var(--orange); }
+
+/* ─── MARQUEE SHELF ──────────────────────────────────────────────────────── */
+.shelf-divider {
+  background: var(--charcoal); padding: 60px 0; position: relative; overflow: hidden;
+}
+.shelf-track {
+  display: flex; gap: 60px; overflow: hidden; white-space: nowrap;
+  animation: shelfScroll 20s linear infinite;
+}
+@keyframes shelfScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.shelf-item {
+  font-family: 'Bebas Neue'; font-size: 3.5rem; letter-spacing: 0.08em;
+  color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+.shelf-item.filled { color: var(--cream); -webkit-text-stroke: none; }
+
+/* ─── ABOUT ──────────────────────────────────────────────────────────────── */
+#about {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; padding: 120px 48px;
+  background: var(--cream);
+}
+.about-left { align-self: center; }
+.about-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px;
+}
+.stat { border-top: 2px solid var(--charcoal); padding-top: 20px; }
+.stat-num {
+  font-family: 'Bebas Neue'; font-size: 3.5rem; line-height: 1;
+  display: block; margin-bottom: 6px;
+}
+.stat-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.5; }
+.about-right { position: relative; height: 500px; }
+#about-canvas { width: 100%; height: 100%; }
+
+/* ─── CTA ────────────────────────────────────────────────────────────────── */
+#cta {
+  background: var(--charcoal); color: var(--cream);
+  padding: 120px 48px; text-align: center; position: relative; overflow: hidden;
+}
+#cta h2 {
+  font-family: 'Playfair Display'; font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900; margin-bottom: 28px; color: var(--cream);
+  position: relative; z-index: 2;
+}
+#cta h2 em { color: var(--gold); font-style: italic; }
+#cta p {
+  opacity: 0.5; font-size: 0.8rem; max-width: 460px;
+  margin: 0 auto 48px; position: relative; z-index: 2;
+}
+.cta-bg-text {
+  position: absolute; font-family: 'Bebas Neue'; font-size: 18vw;
+  color: rgba(255, 255, 255, 0.03); pointer-events: none;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+.btn-cta {
+  background: var(--gold); color: var(--charcoal);
+  padding: 18px 52px; font-family: 'DM Mono'; font-size: 0.75rem;
+  letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
+  display: inline-block; transition: all 0.25s; position: relative; z-index: 2;
+  border: 2px solid var(--gold);
+}
+.btn-cta:hover { background: transparent; color: var(--gold); }
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--charcoal); color: var(--cream);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 40px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 0.15em; }
+.footer-logo span { color: var(--red); }
+footer p { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.3; }
+.footer-links { display: flex; gap: 28px; list-style: none; }
+.footer-links a {
+  font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--cream); opacity: 0.35; text-decoration: none; transition: opacity 0.2s;
+}
+.footer-links a:hover { opacity: 1; }
+
+/* ─── SCROLL REVEAL ──────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; padding: 90px 24px 40px; }
+  .hero-right { height: 350px; }
+  .products-grid { grid-template-columns: 1fr; }
+  #about { grid-template-columns: 1fr; }
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  #services, #about, #cta { padding: 80px 24px; }
+  footer { flex-direction: column; gap: 20px; text-align: center; }
+}
